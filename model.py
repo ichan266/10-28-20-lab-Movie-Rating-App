@@ -14,8 +14,8 @@ class User(db.Model):
                         primary_key = True,
                         autoincrement = True,
                         )
-    email = db.Column(db.Text, unique = True,)
-    password = db.Column(db.Text,)
+    email = db.Column(db.String, unique = True,)
+    password = db.Column(db.String,)
 
     def __repr__(self):
         return f'<User user_id={self.user_id} email={self.email}>'
