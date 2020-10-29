@@ -17,6 +17,8 @@ class User(db.Model):
     email = db.Column(db.String, unique = True)
     password = db.Column(db.String)
 
+    # ratings = a list of Rating objects
+
     def __repr__(self):
         return f'<User user_id={self.user_id} email={self.email}>'
 
@@ -34,6 +36,8 @@ class Movie(db.Model):
     overview = db.Column(db.Text)
     release_date = db.Column(db.DateTime)
     poster_path = db.Column(db.String)
+
+    # rating = a list of Ratings objects
 
     def __repr__(self):
         return f'<Movie movie_id={self.movie_id} title={self.title}>'
@@ -84,9 +88,9 @@ if __name__ == '__main__':
 
 
 
-# rating_user_id = Rating.query.get(1).user_id
+# *rating_user_id = Rating.query.get(1).user_id*?
 
-# taing_user = User.query.get(rating.user_id)
+# rating_user = User.query.get(rating.user_id)
 
 
 # Question: What is the user that wrote the rating of rating #1?
