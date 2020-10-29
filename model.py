@@ -8,7 +8,7 @@ db = SQLAlchemy()
 class User(db.Model):
     """A user."""
 
-    __tablename__ = "users"
+    __tablename__ = 'users'
 
     user_id = db.Column(db.Integer,
                         primary_key = True,
@@ -16,6 +16,9 @@ class User(db.Model):
                         )
     email = db.Column(db.Text, unique = True,)
     password = db.Column(db.Text,)
+
+    def __repr__(self):
+        return f'<User user_id={self.user_id} email={self.email}>'
 
 
 def connect_to_db(flask_app, db_uri='postgresql:///ratings', echo=True):
