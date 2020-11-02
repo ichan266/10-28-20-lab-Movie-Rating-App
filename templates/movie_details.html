@@ -1,0 +1,13 @@
+{% extends 'base.html' %}
+
+{% block title %}{{ jinja_movie.title }} - Details{% endblock %}
+
+{% block body %}
+<h1>{{ jinja_movie.title }}</h1>
+
+<p>
+    {{ jinja_movie.overview }}
+</p>
+
+<img src="{{ jinja_movie.poster_path }}">
+{% endblock %}
