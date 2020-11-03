@@ -32,6 +32,22 @@ def show_movie(movie_id):
 
     return render_template('movie_details.html', jinja_movie=movie) # we changed movies_jinja from movies (in solution)
 
+@app.route('/users')
+def all_users():
+    """View all users."""
+
+    users = crud.get_users()
+
+    return render_template('all_users.html', jinja_users=users) # we changed movies_jinja from movies (in solution)
+
+@app.route('/users/<user_id>')  #route with a variable URL
+def show_movie(movie_id):
+    """Show details on a particular user."""
+
+    user = crud.get_user_by_id(user_id)
+
+    return render_template('user_details.html', jinja_user=user)
+
 
 if __name__ == '__main__':
     connect_to_db(app)
