@@ -40,13 +40,52 @@ def all_users():
 
     return render_template('all_users.html', jinja_users=users) # we changed movies_jinja from movies (in solution)
 
+@app.route('/users', methods=['POST'])
+def register_user():
+    """Create a new user."""
+
+    email = request.form.get('email')
+    password = request.form.get('password')
+
+    user = crud.get_user_by_email(email)
+    if user:
+        flash('Cannot create an account with that email. Try again.')
+    else:
+        crud.create_user(email, password)
+        flash('Account created! Please log in.')
+
+    return redirect('/')
+
+
 @app.route('/users/<user_id>')  #route with a variable URL
-def show_movie(movie_id):
+def show_user(user_id):
     """Show details on a particular user."""
 
     user = crud.get_user_by_id(user_id)
 
     return render_template('user_details.html', jinja_user=user)
+
+
+@app.route('/handle-form-session')
+def login():
+    """ Handle session from users who created account already."""
+
+    email = request.args.get('email')
+    password = request.args.get('password')
+
+    # print(f'email is {email} and password is {password}')
+
+    user = crud.get_user_by_email(email)
+    # if  user != None:
+    #     print(f'DB email is {user.email} and password is {user.password}')
+
+    if  user == None or password != user.password:
+        flash("Email and password did not match our records. Please try again.")
+    else:
+        flash('Successfully logged in!')
+        session['user_id'] = user.user_id
+    
+    return redirect('/')
 
 
 if __name__ == '__main__':
