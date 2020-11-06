@@ -84,8 +84,11 @@ def login():
     else:
         flash('Successfully logged in!')
         session['user_id'] = user.user_id
-    
+        print(f"HERE THIS THE SESSION{session['user_id']}")
+
+
     return redirect('/')
+
 
 
 if __name__ == '__main__':
